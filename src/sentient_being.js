@@ -1,2 +1,3 @@
 var SentientBeing = function() {
+  return {};
 }
