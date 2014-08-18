@@ -1,6 +1,6 @@
 beforeEach(function () {
-  jasmine.addMatchers({
-    // EXAMPLE
+  // EXAMPLE
+  // jasmine.addMatchers({
     // toBePlaying: function () {
     //   return {
     //     compare: function (actual, expected) {
@@ -12,7 +12,5 @@ beforeEach(function () {
     //     }
     //   };
     // }
-
-    
-  });
+  // });
 });
