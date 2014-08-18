@@ -1,0 +1,2 @@
+var SentientBeing = function() {
+}
