@@ -1,0 +1,27 @@
+{
+  "name": "sentient_being",
+  "version": "0.0.0",
+  "authors": [
+    "Neilos <nosniktatkinson@hotmail.co.uk>"
+  ],
+  "description": "Bringing javascript objects to life",
+  "main": "src/sentient_being.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "this",
+    "sentient",
+    "being",
+    "object"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Neilos/sentient_being",
+  "ignore": [
+    "spec",
+    "lib"
+    "MIT.license",
+    ".gitignore",
+    "SpecRunner.html"
+  ]
+}
