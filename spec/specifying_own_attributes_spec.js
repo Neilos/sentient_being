@@ -82,7 +82,7 @@ describe("Specifying attributes by passing in an object,", function() {
 
     beforeEach(function() {
       being = new SentientBeing({
-        bringToLife : function(me, my, I) {
+        bringToLife : function(me, my, I, I_can, p5, p6, p7, p8, p9, p10, p11) {
           my.hair = "short";
           my.speed = 5;
           I.run = function() {
@@ -91,6 +91,9 @@ describe("Specifying attributes by passing in an object,", function() {
           my.identity = me;
           I.stateCatchphrase = function() {
             return my.catchphrase;
+          };
+          I_can.sayPersonalPronouns = function() {
+            return [me, my, I, I_can, p5, p6, p7, p8, p9, p10, p11];
           };
         },
         catchphrase : "whaaaat?????",
@@ -103,6 +106,12 @@ describe("Specifying attributes by passing in an object,", function() {
           }
         }
       });
+    });
+
+    it("can use no more than 10 personal pronouns", function() {
+      var pronouns = being.sayPersonalPronouns();
+      expect(pronouns[9]).not.toBe(undefined);
+      expect(pronouns[10]).toBe(undefined);
     });
 
     describe("creates a new object", function() {

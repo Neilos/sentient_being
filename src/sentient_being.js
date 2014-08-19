@@ -7,7 +7,7 @@ var SentientBeing = function(blueprint) {
     for (var attribute in blueprint) {
       if (blueprint.hasOwnProperty(attribute)) {
         if (attribute == "bringToLife") {
-          newBeing[attribute] = blueprint[attribute].bind(newBeing, newBeing, newBeing, newBeing);
+          newBeing[attribute] = blueprint[attribute].bind(newBeing, newBeing, newBeing, newBeing, newBeing, newBeing, newBeing, newBeing, newBeing, newBeing, newBeing);
         } else {
           newBeing[attribute] = blueprint[attribute];
         }
