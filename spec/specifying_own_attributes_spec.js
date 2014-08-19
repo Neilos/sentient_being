@@ -15,6 +15,10 @@ describe("Specifying attributes by passing in an object,", function() {
           this.stateCatchphrase = function() {
             return this.catchphrase;
           }
+          var secret = "shhhh";
+          this.announceSecret = function() {
+            return secret;
+          }
         },
         catchphrase : "whaaaat?????",
         speedInWords : function() {
@@ -76,6 +80,11 @@ describe("Specifying attributes by passing in an object,", function() {
 
     });
 
+    it("private attributes can be declared with local variables within the 'bringToLife' function", function() {
+      expect(being.secret).toBe(undefined); // not accessible outside the object
+      expect(being.announceSecret()).toEqual("shhhh");
+    });
+
   });
 
   describe("using personal pronouns instead of 'this',", function() {
@@ -89,8 +98,12 @@ describe("Specifying attributes by passing in an object,", function() {
             my.speed = my.speed * 2;
           };
           my.identity = me;
-          I.stateCatchphrase = function() {
+          I_can.stateCatchphrase = function() {
             return my.catchphrase;
+          };
+          var secret = "shhhh";
+          I_can.announceSecret = function() {
+            return secret;
           };
           I_can.sayPersonalPronouns = function() {
             return [me, my, I, I_can, p5, p6, p7, p8, p9, p10, p11];
@@ -161,6 +174,11 @@ describe("Specifying attributes by passing in an object,", function() {
         expect(being2.speed).toEqual(21);
       });
 
+    });
+
+    it("private attributes can be declared with local variables within the 'bringToLife' function", function() {
+      expect(being.secret).toBe(undefined); // not accessible outside the object
+      expect(being.announceSecret()).toEqual("shhhh");
     });
 
   });
