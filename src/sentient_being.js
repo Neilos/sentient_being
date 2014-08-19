@@ -3,9 +3,6 @@ var SentientBeing = function(blueprint) {
   var God = function() {
 
     var newBeing = {};
-    var I = newBeing;
-    var me = newBeing;
-    var my = newBeing;
 
     for (var attribute in blueprint) {
       if (blueprint.hasOwnProperty(attribute)) {
