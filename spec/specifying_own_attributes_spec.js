@@ -1,5 +1,6 @@
-describe("Specifying attributes by passing in an object,", function() {
+describe("Specifying attributes by passing in an object as the starting identity,", function() {
   var being, being2;
+  var home, album1, album2, album3;
 
   describe("using 'this',", function() {
 
@@ -180,6 +181,45 @@ describe("Specifying attributes by passing in an object,", function() {
     it("private attributes can be declared with local variables within the 'bringToLife' function", function() {
       expect(being.secret).toBe(undefined); // not accessible outside the object
       expect(being.announceSecret()).toEqual("shhhh");
+    });
+
+  });
+
+  describe("using another SentientBeing as the starting identity", function() {
+
+    beforeEach(function() {
+      home = { roof: true };
+      album1 = { name: "The White Album", artist: "The Beatles" }
+      album2 = { name: "Thriller", artist: "Michael Jackson" }
+      album3 = { name: "The Wall", artist: "Pink Floyd" }
+      being = new SentientBeing({
+        bringToLife : function(my) {
+          my.albums = [album1, album3, album2];
+          my.car = { type : "volvo" };
+        },
+        home : home
+      });
+      being2 = new SentientBeing(being);
+    });
+
+    it("creates a new being with the attributes copied from the given sentient being to the new one", function() {
+      expect(being2.albums).toBeDefined();
+      expect(being2.car).toBeDefined();
+      expect(being2.home).toBeDefined();
+    });
+
+    it("copies the object references, not the object attributes themselves", function() {
+      expect(being2.home).toBe(being.home);
+      expect(being2.car).toBe(being.car);
+    });
+
+    it("for array attributes, the object references are copied to a new array", function() {
+      expect(being2.albums).not.toBe(being.albums);
+      for (var i = 0; i < being2.albums.length; i++) {
+        expect(being2.albums[i]).toBe(being.albums[i]);
+      }
+      being.albums.pop();
+      expect(being2.albums.length).not.toEqual(being.albums.length);
     });
 
   });
