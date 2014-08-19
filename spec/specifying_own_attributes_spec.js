@@ -1,4 +1,4 @@
-describe("Specifying own attributes,", function() {
+describe("Specifying attributes by passing in an object,", function() {
   var being, being2;
 
   describe("using 'this',", function() {
@@ -12,19 +12,32 @@ describe("Specifying own attributes,", function() {
             this.speed = this.speed * 2;
           };
           this.identity = this;
+        },
+        catchphrase : "whaaaat?????",
+        speedInWords : function() {
+          if (this.speed > 5) {
+            return "fast";
+          } else {
+            return "slow"
+          }
         }
       });
     });
 
-    it("the object is created with the attributes specified in the 'bringToLife' function", function() {
+    it("creates a new object with the attributes specified", function() {
       expect(being.hair).toEqual("short");
       expect(being.speed).toEqual(5);
       being.run();
       expect(being.speed).toEqual(10);
       expect(being.identity).toBe(being);
+      expect(being.catchphrase).toEqual("whaaaat?????");
     });
 
-    it("attributes are NOT shared between objects", function() {
+    it("attributes specified outside the 'bringToLife' function have access to attributes within the 'bringToLife' function", function() {
+      expect(being.speedInWords()).toEqual("slow");
+    })
+
+    it("attributes are NOT shared between multiple objects", function() {
       being2 = new SentientBeing({
         bringToLife : function() {
           this.hair = "long";
@@ -65,19 +78,32 @@ describe("Specifying own attributes,", function() {
             my.speed = my.speed * 2;
           };
           my.identity = me;
+        },
+        catchphrase : "whaaaat?????",
+        speedInWords : function() {
+          if (me.speed > 5) {
+            return "fast";
+          } else {
+            return "slow"
+          }
         }
       });
     });
 
-    it("the object is created with the attributes specified in the 'bringToLife' function", function() {
+    it("a new object is created with the attributes specified", function() {
       expect(being.hair).toEqual("short");
       expect(being.speed).toEqual(5);
       being.run();
       expect(being.speed).toEqual(10);
       expect(being.identity).toBe(being);
+      expect(being.catchphrase).toEqual("whaaaat?????");
     });
 
-    it("attributes are NOT shared between objects", function() {
+    it("attributes specified outside the 'bringToLife' function do NOT have access to personal pronoun syntax", function() {
+      expect(being.speedInWords).toThrow();
+    })
+
+    it("attributes are NOT shared between multiple objects", function() {
       being2 = new SentientBeing({
         bringToLife : function(me, my, I) {
           my.hair = "long";
