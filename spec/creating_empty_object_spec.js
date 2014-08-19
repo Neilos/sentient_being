@@ -4,28 +4,44 @@ describe("Calling SentientBeing", function() {
 
   describe("as a constructor", function() {
 
-    it("creates a new object", function() {
-      being = new SentientBeing();
-      expect(typeof being).toBe("object");
+    describe("creates a new object", function() {
 
-      being2 = new SentientBeing();
-      expect(typeof being2).toBe("object");
+      it("that is distinct from other sentient beings", function() {
+        being = SentientBeing();
+        expect(typeof being).toBe("object");
 
-      expect(being).not.toBe(being2);
+        being2 = SentientBeing();
+        expect(typeof being2).toBe("object");
+
+        expect(being).not.toBe(being2);
+      });
+
+      it("with a 'bringToLife' function", function() {
+        expect(being.bringToLife).toBeDefined();
+      });
+
     });
 
   });
 
   describe("as a function", function() {
 
-    it("creates a new object", function() {
-      being = SentientBeing();
-      expect(typeof being).toBe("object");
+    describe("creates a new object", function() {
 
-      being2 = SentientBeing();
-      expect(typeof being2).toBe("object");
+      it("that is distinct from other sentient beings", function() {
+        being = SentientBeing();
+        expect(typeof being).toBe("object");
 
-      expect(being).not.toBe(being2);
+        being2 = SentientBeing();
+        expect(typeof being2).toBe("object");
+
+        expect(being).not.toBe(being2);
+      });
+
+      it("with a 'bringToLife' function", function() {
+        expect(being.bringToLife).toBeDefined();
+      });
+
     });
 
   });
