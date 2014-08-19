@@ -14,33 +14,31 @@ var SentientBeing = function(blueprint) {
     return Object.prototype.toString.call(possibleArray) === '[object Array]';
   };
 
+  var createFromBlueprint = function() {
+    var newObject = {};
+    for (var attribute in blueprint) {
 
-  var God = function() {
+      if (blueprint.hasOwnProperty(attribute)) {
+        var attrDefinition = blueprint[attribute];
 
-    var createFromBlueprint = function() {
-      var newObject = {};
-      for (var attribute in blueprint) {
-
-        if (blueprint.hasOwnProperty(attribute)) {
-          var attrDefinition = blueprint[attribute];
-
-          if (attribute == "bringToLife") {
-            learnToComeALive(newObject, attrDefinition);
-            newObject.bringToLife();
-          }
-          else if (isArray(attrDefinition)) {
-            newObject[attribute] = attrDefinition.concat();
-          }
-          else {
-            newObject[attribute] = attrDefinition;
-          }
+        if (attribute == "bringToLife") {
+          learnToComeALive(newObject, attrDefinition);
+          newObject.bringToLife();
+        }
+        else if (isArray(attrDefinition)) {
+          newObject[attribute] = attrDefinition.concat();
+        }
+        else {
+          newObject[attribute] = attrDefinition;
         }
       }
+    }
 
-      newObject.bringToLife = newObject.bringToLife || function() {};
-      return newObject;
-    };
+    newObject.bringToLife = newObject.bringToLife || function() {};
+    return newObject;
+  };
 
+  var God = function() {
     var newBeing = createFromBlueprint();
     return newBeing;
   };
