@@ -121,10 +121,11 @@ describe("Specifying attributes by passing in an object,", function() {
       });
     });
 
-    it("can use no more than 10 personal pronouns", function() {
+    it("can use an arbitrary number of personal pronouns and all specified will be created", function() {
       var pronouns = being.sayPersonalPronouns();
-      expect(pronouns[9]).not.toBe(undefined);
-      expect(pronouns[10]).toBe(undefined);
+      for (var i = 0; i < pronouns.length; i++) {
+        expect(pronouns[i]).toBe(being);
+      }
     });
 
     describe("creates a new object", function() {
