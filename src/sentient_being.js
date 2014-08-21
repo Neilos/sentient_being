@@ -1,7 +1,9 @@
 var SentientBeing = function(Parent, props) {
 
-  var Child
-
-  Child = function() {}
-  return Child;
+  var SentientBeing
+  SentientBeing = function God() {}
+  SentientBeing.constructor = SentientBeing;
+  return SentientBeing;
 }
+
+
