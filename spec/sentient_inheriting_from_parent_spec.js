@@ -39,6 +39,14 @@ describe("SentientBeing inherits from parent;", function() {
 
     });
 
+    describe("an object instance", function() {
+
+      it("has a parent property that is set to the parent", function() {
+        expect(bob.parent).toEqual(Ape);
+      });
+
+    });
+
   });
 
 });
