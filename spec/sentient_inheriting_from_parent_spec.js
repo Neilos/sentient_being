@@ -42,7 +42,19 @@ describe("SentientBeing inherits from parent;", function() {
     describe("an object instance", function() {
 
       it("has a parent property that is set to the parent", function() {
-        expect(bob.parent).toEqual(Ape);
+        expect(bob.parent).toBe(Ape);
+      });
+
+      describe("when parent is a constructor function", function() {
+
+        it("is an instanceof <parent>", function() {
+          var Monkey = function() {};
+          var SpiderMonkey = SentientBeing({ parent : Monkey })
+          var fred = new SpiderMonkey();
+          console.log(fred.parent);
+          expect(fred instanceof fred.parent).toEqual(true);
+        });
+
       });
 
     });
