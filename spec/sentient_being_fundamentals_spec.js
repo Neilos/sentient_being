@@ -81,6 +81,11 @@ describe("SentientBeing", function() {
       expect(god.prototype.constructor.name).toEqual("God")
     })
 
+    it("is not a SentientBeing", function() {
+      expect(god instanceof SentientBeing).toBe(false);
+      expect(god).not.toBe(SentientBeing);
+    });
+
   });
 
 });
