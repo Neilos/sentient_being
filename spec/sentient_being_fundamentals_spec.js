@@ -1,5 +1,5 @@
 describe("SentientBeing", function() {
-  var Human, Ape, bob;
+  var Human, bob;
 
   beforeEach(function() {
     Human = SentientBeing();
@@ -59,3 +59,5 @@ describe("SentientBeing", function() {
   });
 
 });
+
+
