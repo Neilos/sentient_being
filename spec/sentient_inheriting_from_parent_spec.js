@@ -1,4 +1,4 @@
-describe("SentientBeing inheriting from parent;", function() {
+describe("SentientBeing inherits from parent;", function() {
   var Human, Ape, bob;
 
   beforeEach(function() {
@@ -15,7 +15,7 @@ describe("SentientBeing inheriting from parent;", function() {
       expect(Human.parent).toBe(Ape.prototype);
     })
 
-    describe("an attribute inherited from a specified parent's prototype", function() {
+    describe("an attribute inherited from the parent's prototype", function() {
 
       it("can be called on object instances", function() {
         expect(bob.communicate()).toEqual("ook");
