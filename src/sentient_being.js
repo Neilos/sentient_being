@@ -3,7 +3,9 @@ var SentientBeing = function(blueprint) {
   var SentientBeing, DNA, Parent, God;
 
   SentientBeing = function SentientBeing() {
-
+    if (SentientBeing.prototype.hasOwnProperty("bringToLife")) {
+      SentientBeing.prototype.bringToLife.apply(this, arguments);
+    }
   }
 
   if (blueprint && blueprint.parent) {
@@ -23,6 +25,15 @@ var SentientBeing = function(blueprint) {
   SentientBeing.prototype.constructor = God;
   SentientBeing.constructor = God;
 
+  for (attribute in blueprint) {
+    if (blueprint.hasOwnProperty(attribute)) {
+      if (attribute === "bringToLife") {
+        SentientBeing.prototype[attribute] = blueprint[attribute].call();
+      } else {
+        SentientBeing.prototype[attribute] = blueprint[attribute];
+      }
+    }
+  }
 
   return SentientBeing;
 }
