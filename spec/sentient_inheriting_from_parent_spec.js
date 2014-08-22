@@ -23,17 +23,32 @@ describe("SentientBeing inherits from parent;", function() {
       var Vulcan, Romulan, remus
 
       beforeEach(function() {
+
         Vulcan = new SentientBeing({
           bringToLife: function() {
-            return function() { this.ears = "pointy"; };
+            return function() {
+              this.ears = "pointy";
+              this.emotional = false;
+            };
           }
         });
-        Romulan = SentientBeing({ parent : Vulcan });
+
+        Romulan = SentientBeing({
+          parent : Vulcan,
+          bringToLife: function() {
+            return function() { this.emotional = true; };
+          }
+        });
+
         remus = new Romulan();
       });
 
       it("attribute is inherited", function() {
         expect(remus.ears).toEqual("pointy");
+      });
+
+      it("attributes on parent do not overwrite attributes on the child", function() {
+        expect(remus.emotional).toBe(true);
       });
 
     });
