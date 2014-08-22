@@ -117,7 +117,6 @@ describe("Species inheriting from an ancestor species;", function() {
         var Monkey = function() {};
         var SpiderMonkey = Species({ ancestorSpecies : Monkey })
         var fred = new SpiderMonkey();
-        console.log(fred.ancestorSpecies);
         expect(fred instanceof fred.ancestorSpecies).toEqual(true);
       });
 
