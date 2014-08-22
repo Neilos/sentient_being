@@ -8,7 +8,7 @@ var SentientBeing = function(blueprint) {
     if (SentientBeing.prototype.hasOwnProperty("bringToLife")) {
       SentientBeing.prototype.bringToLife.apply(this, arguments);
     }
-  }
+  };
 
   if (blueprint && blueprint.parent) {
     Parent = blueprint.parent;
@@ -16,7 +16,7 @@ var SentientBeing = function(blueprint) {
     Parent = Object;
   }
 
-  God = function God(){ return SentientBeing;}
+  God = function God(){ return SentientBeing; };
   God.constructor = God;
   God.prototype.constructor = God;
   God.givePowerOfLifeTo = function(being) {
@@ -43,4 +43,4 @@ var SentientBeing = function(blueprint) {
   God.givePowerOfLifeTo(SentientBeing);
 
   return SentientBeing;
-}
+};
