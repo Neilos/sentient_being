@@ -1,9 +1,10 @@
-describe("Species;", function() {
+describe("Species", function() {
   var Human, bob;
 
   beforeEach(function() {
     Human = Species({
       bringToLife: function() {
+        this.wings = "Yes! now I can fly"; // no you can't. defining attributes here won't work.
         return function(name) {
           this.name = name;
           this.sayName = function() {
@@ -15,11 +16,15 @@ describe("Species;", function() {
     bob = new Human("bob");
   });
 
-  describe("an object instance", function() {
+  describe("object instance", function() {
 
-    it("has the attributes specified in the 'bringToLife' function", function(){
+    it("has the attributes specified in the 'bringToLife' function (in the inner function)", function(){
       expect(bob.name).toEqual("bob");
       expect(bob.sayName()).toEqual("My name is bob");
+    });
+
+    it("does NOT have the attributes specified outside the inner function in the 'bringToLife' function", function() {
+      expect(bob.wings).toBe(undefined);
     });
 
     it("can override a specified attribute", function() {
