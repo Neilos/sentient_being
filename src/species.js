@@ -1,35 +1,33 @@
 var Species = function(blueprint) {
-  var Species, DNA, AncestorSpecies, God;
+  var Species, DNA, AncestorSpecies, God, lifeForce, selfAwareness, selfAwareBeing;
+
+  var pronounsFor = function(self, selfCount) {
+    return Array.apply(null, new Array(selfCount)).map(Object.prototype.valueOf, self);
+  };
+
+  var grantHeritageAwareness = function() {
+    lifeForce = Species.ancestorSpecies.bringToLife;
+    selfAwareness = pronounsFor(this, lifeForce.length);
+    selfAwareBeing = [this].concat(selfAwareness);
+    return lifeForce.apply(this, selfAwareBeing).apply(this, arguments);
+  }
+
+  var grantSelfAwareness = function() {
+    lifeForce = Species.prototype.bringToLife;
+    selfAwareness = pronounsFor(this, lifeForce.length);
+    selfAwareBeing = [this].concat(selfAwareness);
+    return lifeForce.apply(this, selfAwareBeing).apply(this, arguments);
+  }
 
   Species = function Species() {
-    var lifeForce, selfAwareness, selfAwareBeing;
-
-    var pronounsFor = function(self, selfCount) {
-      return Array.apply(null, new Array(selfCount)).map(Object.prototype.valueOf, self);
-    };
-
-    var grantAncestorCharacteristics = function() {
-      if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
-        lifeForce = Species.ancestorSpecies.bringToLife;
-        var ancestorBringToLife = lifeForce.apply(this); //need some pronouns as well
-        return ancestorBringToLife.apply(this, arguments);
-      }
-    }
-
-    var grantSpeciesCharacteristics = function() {
-      if (Species.prototype.hasOwnProperty("bringToLife")) {
-        lifeForce = Species.prototype.bringToLife;
-        selfAwareness = pronounsFor(this, lifeForce.length);
-        selfAwareBeing = [this].concat(selfAwareness);
-        return lifeForce.apply(this, selfAwareBeing).apply(this, arguments);
-      }
-    }
-
     this.bringToLife = function() {
-      grantAncestorCharacteristics.apply(this, arguments);
-      grantSpeciesCharacteristics.apply(this, arguments);
+      if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
+        grantHeritageAwareness.apply(this, arguments);
+      }
+      if (Species.prototype.hasOwnProperty("bringToLife")) {
+        grantSelfAwareness.apply(this, arguments);
+      }
     };
-
     this.bringToLife.apply(this, arguments);
   };
 
