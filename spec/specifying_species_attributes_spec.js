@@ -1,8 +1,8 @@
-describe("Sentient Being;", function() {
+describe("Species;", function() {
   var Human, bob;
 
   beforeEach(function() {
-    Human = SentientBeing({
+    Human = Species({
       bringToLife: function() {
         return function(name) {
           this.name = name;

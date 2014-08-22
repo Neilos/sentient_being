@@ -1,17 +1,17 @@
-describe("SentientBeing", function() {
+describe("Species", function() {
   var Human, bob;
 
   beforeEach(function() {
-    Human = SentientBeing();
+    Human = Species();
     bob = new Human();
   });
 
   it("is a function", function() {
-    expect(typeof SentientBeing).toBe('function');
+    expect(typeof Species).toBe('function');
   });
 
   it("was constructed by Function", function() {
-    expect(SentientBeing.constructor).toBe(Function);
+    expect(Species.constructor).toBe(Function);
   });
 
   it("returns a constructor function", function() {
@@ -21,9 +21,9 @@ describe("SentientBeing", function() {
 
   describe("the returned constructor function", function() {
 
-    it("is also a SentientBeing but is not THE SentientBeing", function() {
-      expect(Human.name).toEqual("SentientBeing");
-      expect(Human).not.toBe(SentientBeing);
+    it("is also a Species but is not THE Species", function() {
+      expect(Human.name).toEqual("Species");
+      expect(Human).not.toBe(Species);
     });
 
     it("was constructed by God", function() {
@@ -32,15 +32,15 @@ describe("SentientBeing", function() {
 
   });
 
-  describe("object instance created with a SentientBeing constructor function", function() {
-
-    it("is a plain old javascript object (POJO)", function() {
-      expect(bob instanceof Object).toBe(true);
-    })
+  describe("object instance created with a Species constructor function", function() {
 
     it("is a 'typeof' object", function() {
       expect(typeof bob).toEqual("object");
-    })
+    });
+
+    it("is an 'instanceof' Object", function() {
+      expect(bob instanceof Object).toBe(true);
+    });
 
     it("is an 'instanceof' the constructor function", function() {
       expect(bob instanceof Human).toBe(true);
@@ -85,9 +85,9 @@ describe("SentientBeing", function() {
       expect(god.prototype.constructor.name).toEqual("God")
     })
 
-    it("is not a SentientBeing", function() {
-      expect(god instanceof SentientBeing).toBe(false);
-      expect(god).not.toBe(SentientBeing);
+    it("is not a Species", function() {
+      expect(god instanceof Species).toBe(false);
+      expect(god).not.toBe(Species);
     });
 
   });

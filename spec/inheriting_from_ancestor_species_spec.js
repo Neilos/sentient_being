@@ -1,17 +1,17 @@
-describe("SentientBeing inherits from parent;", function() {
+describe("Species inheriting from an ancestor species;", function() {
   var Human, Ape, bob;
 
   beforeEach(function() {
     Ape = { dexterity : "poor" };
     Ape.prototype = {};
     Ape.prototype.communicate = function() { return "ook" };
-    Human = SentientBeing({ parent : Ape });
+    Human = Species({ ancestorSpecies : Ape });
     bob = new Human();
   });
 
-  describe("an attribute of the parent (i.e. non-prototype attributes)", function() {
+  describe("an attribute of the ancestor species (i.e. non-prototype attributes)", function() {
 
-    describe("when the parent is a plain old javascript object", function() {
+    describe("when the ancestor species is a plain old javascript object", function() {
 
       it("attribute is NOT inherited", function() {
         expect(bob.dexterity).toBe(undefined);
@@ -19,12 +19,12 @@ describe("SentientBeing inherits from parent;", function() {
 
     });
 
-    describe("when parent is another SentientBeing", function() {
+    describe("when ancestor species is another species (not just a POJO)", function() {
       var Vulcan, Romulan, remus, spock
 
       beforeEach(function() {
 
-        Vulcan = new SentientBeing({
+        Vulcan = new Species({
           bringToLife: function() {
             this.haircut = "not an attribute"; // not an attribute of Vulcan
             return function() {
@@ -35,8 +35,8 @@ describe("SentientBeing inherits from parent;", function() {
           homeworld : "Vulcan"
         });
 
-        Romulan = SentientBeing({
-          parent : Vulcan,
+        Romulan = Species({
+          ancestorSpecies : Vulcan,
           bringToLife: function() {
             return function() { this.emotional = true; };
           }
@@ -46,26 +46,26 @@ describe("SentientBeing inherits from parent;", function() {
         spock = new Vulcan();
       });
 
-      it("parent attributes are inherited as properties belonging to the child", function() {
+      it("ancestor species' attributes are inherited as properties belonging to the child", function() {
         expect(remus.ears).toEqual("pointy");
         expect(remus.hasOwnProperty("ears")).toBe(true);
       });
 
-      it("attributes declared on the parent's prototype are accessible via an object instance's prototype", function() {
+      it("attributes declared on the ancestor species's prototype are accessible via an object instance's prototype", function() {
         expect(remus.homeworld).toBe("Vulcan");
         expect(remus.hasOwnProperty("homeworld")).toBe(false);
         if (Object.prototype.hasOwnProperty("__proto__")) {
           var remusDNA = remus.__proto__;
           expect("homeworld" in remusDNA).toBe(true);
 
-          var parentDNA = remusDNA.__proto__;
+          var ancestorSpeciesDNA = remusDNA.__proto__;
           var spockDNA = spock.__proto__;
-          expect(parentDNA).toBe(spockDNA);
-          expect(parentDNA.hasOwnProperty("homeworld")).toBe(true);
+          expect(ancestorSpeciesDNA).toBe(spockDNA);
+          expect(ancestorSpeciesDNA.hasOwnProperty("homeworld")).toBe(true);
         }
       });
 
-      it("parent attributes do not overwrite child attributes", function() {
+      it("ancestor species attributes do not overwrite child attributes", function() {
         expect(remus.emotional).toBe(true);
       });
 
@@ -73,7 +73,7 @@ describe("SentientBeing inherits from parent;", function() {
 
   });
 
-  describe("an attribute inherited from the parent's prototype", function() {
+  describe("an attribute inherited from the ancestor species' prototype", function() {
 
     it("can be called on object instances", function() {
       expect(bob.communicate()).toEqual("ook");
@@ -99,26 +99,26 @@ describe("SentientBeing inherits from parent;", function() {
 
   describe("the returned constructor function", function() {
 
-    it("has a parent property that is set to the specified parent's prototype", function() {
-      expect(Human.parent).toBe(Ape.prototype);
+    it("has a ancestorSpecies property that is set to the specified ancestorSpecies's prototype", function() {
+      expect(Human.ancestorSpecies).toBe(Ape.prototype);
     });
 
   });
 
   describe("an object instance", function() {
 
-    it("has a parent property that is set to the parent", function() {
-      expect(bob.parent).toBe(Ape);
+    it("has a ancestorSpecies property that is set to the ancestorSpecies", function() {
+      expect(bob.ancestorSpecies).toBe(Ape);
     });
 
-    describe("when parent is a constructor function", function() {
+    describe("when ancestorSpecies is a constructor function", function() {
 
-      it("is an instanceof <parent>", function() {
+      it("is an instanceof <ancestorSpecies>", function() {
         var Monkey = function() {};
-        var SpiderMonkey = SentientBeing({ parent : Monkey })
+        var SpiderMonkey = Species({ ancestorSpecies : Monkey })
         var fred = new SpiderMonkey();
-        console.log(fred.parent);
-        expect(fred instanceof fred.parent).toEqual(true);
+        console.log(fred.ancestorSpecies);
+        expect(fred instanceof fred.ancestorSpecies).toEqual(true);
       });
 
     });
