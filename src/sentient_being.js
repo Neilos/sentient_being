@@ -2,6 +2,9 @@ var SentientBeing = function(blueprint) {
   var SentientBeing, DNA, Parent, God;
 
   SentientBeing = function SentientBeing() {
+    if (SentientBeing.parent && SentientBeing.parent.hasOwnProperty("bringToLife")) {
+      SentientBeing.parent.bringToLife.apply(this, arguments);
+    }
     if (SentientBeing.prototype.hasOwnProperty("bringToLife")) {
       SentientBeing.prototype.bringToLife.apply(this, arguments);
     }

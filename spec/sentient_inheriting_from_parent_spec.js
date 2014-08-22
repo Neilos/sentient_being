@@ -19,6 +19,25 @@ describe("SentientBeing inherits from parent;", function() {
 
     });
 
+    describe("when parent is another SentientBeing", function() {
+      var Vulcan, Romulan, remus
+
+      beforeEach(function() {
+        Vulcan = new SentientBeing({
+          bringToLife: function() {
+            return function() { this.ears = "pointy"; };
+          }
+        });
+        Romulan = SentientBeing({ parent : Vulcan });
+        remus = new Romulan();
+      });
+
+      it("attribute is inherited", function() {
+        expect(remus.ears).toEqual("pointy");
+      });
+
+    });
+
   });
 
   describe("an attribute inherited from the parent's prototype", function() {
