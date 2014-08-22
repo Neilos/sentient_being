@@ -34,6 +34,10 @@ describe("SentientBeing", function() {
 
   describe("object instance created with a SentientBeing constructor function", function() {
 
+    it("is a plain old javascript object (POJO)", function() {
+      expect(bob instanceof Object).toBe(true);
+    })
+
     it("is a 'typeof' object", function() {
       expect(typeof bob).toEqual("object");
     })
