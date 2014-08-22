@@ -2,29 +2,30 @@ var Species = function(blueprint) {
   var Species, DNA, AncestorSpecies, God;
 
   Species = function Species() {
+    var lifeForce;
 
-    var ancestorLifeForce = function() {
+    var grantAncestorCharacteristics = function() {
       if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
-        var ancestorBringToLife = Species.ancestorSpecies.bringToLife.apply(this);
+        lifeForce = Species.ancestorSpecies.bringToLife;
+        var ancestorBringToLife = lifeForce.apply(this); //need some pronouns as well
         return ancestorBringToLife.apply(this, arguments);
       }
     }
 
-    var speciesLifeForce = function() {
+    var grantSpeciesCharacteristics = function() {
       if (Species.prototype.hasOwnProperty("bringToLife")) {
-        var speciesBringToLife = Species.prototype.bringToLife.apply(this); //need some pronouns as well
+        lifeForce = Species.prototype.bringToLife;
+        var speciesBringToLife = lifeForce.apply(this); //need some pronouns as well
         return speciesBringToLife.apply(this, arguments);
       }
     }
-    speciesLifeForce.apply(this, arguments);
 
     this.bringToLife = function() {
-      ancestorLifeForce.apply(this, arguments);
-      speciesLifeForce.apply(this, arguments);
+      grantAncestorCharacteristics.apply(this, arguments);
+      grantSpeciesCharacteristics.apply(this, arguments);
     };
 
     this.bringToLife.apply(this, arguments);
-
   };
 
   if (blueprint && blueprint.ancestorSpecies) {
