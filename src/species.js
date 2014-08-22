@@ -18,7 +18,7 @@ var Species = function(blueprint) {
 
   God = function God(){ return Species; };
   God.constructor = God;
-  God.prototype.constructor = God;
+  God.prototype = God;
   God.givePowerOfLifeTo = function(species) {
     if (species.prototype.hasOwnProperty("bringToLife")) {
       var lifeforce = species.prototype.bringToLife;
