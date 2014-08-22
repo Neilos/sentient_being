@@ -1,5 +1,5 @@
 var Species = function(blueprint) {
-  var Species, DNA, PncestorSpecies, God;
+  var Species, DNA, AncestorSpecies, God;
 
   Species = function Species() {
     if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
@@ -11,9 +11,9 @@ var Species = function(blueprint) {
   };
 
   if (blueprint && blueprint.ancestorSpecies) {
-    PncestorSpecies = blueprint.ancestorSpecies;
+    AncestorSpecies = blueprint.ancestorSpecies;
   } else {
-    PncestorSpecies = Object;
+    AncestorSpecies = Object;
   }
 
   God = function God(){ return Species; };
@@ -22,14 +22,14 @@ var Species = function(blueprint) {
   God.givePowerOfLifeTo = function(species) {
     if (species.prototype.hasOwnProperty("bringToLife")) {
       var lifeforce = species.prototype.bringToLife;
-      species.prototype.bringToLife = lifeforce.apply();
+      species.prototype.bringToLife = lifeforce.apply(species);
     }
   };
 
   DNA = function DNA() {};
-  DNA.prototype = PncestorSpecies.prototype;
+  DNA.prototype = AncestorSpecies.prototype;
   Species.prototype = new DNA();
-  Species.ancestorSpecies = PncestorSpecies.prototype;
+  Species.ancestorSpecies = AncestorSpecies.prototype;
 
   for (attribute in blueprint) {
     if (blueprint.hasOwnProperty(attribute)) {
