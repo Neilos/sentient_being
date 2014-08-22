@@ -20,17 +20,19 @@ describe("SentientBeing inherits from parent;", function() {
     });
 
     describe("when parent is another SentientBeing", function() {
-      var Vulcan, Romulan, remus
+      var Vulcan, Romulan, remus, spock
 
       beforeEach(function() {
 
         Vulcan = new SentientBeing({
           bringToLife: function() {
+            this.haircut = "not an attribute"; // not an attribute of Vulcan
             return function() {
               this.ears = "pointy";
               this.emotional = false;
             };
-          }
+          },
+          homeworld : "Vulcan"
         });
 
         Romulan = SentientBeing({
@@ -41,13 +43,29 @@ describe("SentientBeing inherits from parent;", function() {
         });
 
         remus = new Romulan();
+        spock = new Vulcan();
       });
 
-      it("attribute is inherited", function() {
+      it("parent attributes are inherited as properties belonging to the child", function() {
         expect(remus.ears).toEqual("pointy");
+        expect(remus.hasOwnProperty("ears")).toBe(true);
       });
 
-      it("attributes on parent do not overwrite attributes on the child", function() {
+      it("attributes declared on the parent's prototype are accessible via an object instance's prototype", function() {
+        expect(remus.homeworld).toBe("Vulcan");
+        expect(remus.hasOwnProperty("homeworld")).toBe(false);
+        if (Object.prototype.hasOwnProperty("__proto__")) {
+          var remusDNA = remus.__proto__;
+          expect("homeworld" in remusDNA).toBe(true);
+
+          var parentDNA = remusDNA.__proto__;
+          var spockDNA = spock.__proto__;
+          expect(parentDNA).toBe(spockDNA);
+          expect(parentDNA.hasOwnProperty("homeworld")).toBe(true);
+        }
+      });
+
+      it("parent attributes do not overwrite child attributes", function() {
         expect(remus.emotional).toBe(true);
       });
 
