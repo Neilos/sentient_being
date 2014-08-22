@@ -2,12 +2,29 @@ var Species = function(blueprint) {
   var Species, DNA, AncestorSpecies, God;
 
   Species = function Species() {
-    if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
-      Species.ancestorSpecies.bringToLife.apply(this, arguments);
+
+    var ancestorLifeForce = function() {
+      if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
+        var ancestorBringToLife = Species.ancestorSpecies.bringToLife.apply(this);
+        return ancestorBringToLife.apply(this, arguments);
+      }
     }
-    if (Species.prototype.hasOwnProperty("bringToLife")) {
-      Species.prototype.bringToLife.apply(this, arguments);
+
+    var speciesLifeForce = function() {
+      if (Species.prototype.hasOwnProperty("bringToLife")) {
+        var speciesBringToLife = Species.prototype.bringToLife.apply(this); //need some pronouns as well
+        return speciesBringToLife.apply(this, arguments);
+      }
     }
+    speciesLifeForce.apply(this, arguments);
+
+    this.bringToLife = function() {
+      ancestorLifeForce.apply(this, arguments);
+      speciesLifeForce.apply(this, arguments);
+    };
+
+    this.bringToLife.apply(this, arguments);
+
   };
 
   if (blueprint && blueprint.ancestorSpecies) {
@@ -19,12 +36,6 @@ var Species = function(blueprint) {
   God = function God(){ return Species; };
   God.constructor = God;
   God.prototype = God;
-  God.givePowerOfLifeTo = function(species) {
-    if (species.prototype.hasOwnProperty("bringToLife")) {
-      var lifeforce = species.prototype.bringToLife;
-      species.prototype.bringToLife = lifeforce.apply(species);
-    }
-  };
 
   DNA = function DNA() {};
   DNA.prototype = AncestorSpecies.prototype;
@@ -39,8 +50,6 @@ var Species = function(blueprint) {
 
   Species.prototype.constructor = God;
   Species.constructor = God;
-
-  God.givePowerOfLifeTo(Species);
 
   return Species;
 };

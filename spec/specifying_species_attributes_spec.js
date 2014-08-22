@@ -4,7 +4,7 @@ describe("Species", function() {
   beforeEach(function() {
     Human = Species({
       bringToLife: function() {
-        this.wings = "Yes! now I can fly"; // no you can't. defining attributes here won't work.
+        this.job = "pastry chef";
         return function(name) {
           this.name = name;
           this.sayName = function() {
@@ -18,13 +18,10 @@ describe("Species", function() {
 
   describe("object instance", function() {
 
-    it("has the attributes specified in the 'bringToLife' function (in the inner function)", function(){
+    it("has the attributes specified in the 'bringToLife' function", function(){
       expect(bob.name).toEqual("bob");
       expect(bob.sayName()).toEqual("My name is bob");
-    });
-
-    it("does NOT have the attributes specified outside the inner function in the 'bringToLife' function", function() {
-      expect(bob.wings).toBe(undefined);
+      expect(bob.job).toEqual("pastry chef");
     });
 
     it("can override a specified attribute", function() {
