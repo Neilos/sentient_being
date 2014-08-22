@@ -2,7 +2,11 @@ var Species = function(blueprint) {
   var Species, DNA, AncestorSpecies, God;
 
   Species = function Species() {
-    var lifeForce;
+    var lifeForce, selfAwareness, selfAwareBeing;
+
+    var pronounsFor = function(self, selfCount) {
+      return Array.apply(null, new Array(selfCount)).map(Object.prototype.valueOf, self);
+    };
 
     var grantAncestorCharacteristics = function() {
       if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
@@ -15,8 +19,9 @@ var Species = function(blueprint) {
     var grantSpeciesCharacteristics = function() {
       if (Species.prototype.hasOwnProperty("bringToLife")) {
         lifeForce = Species.prototype.bringToLife;
-        var speciesBringToLife = lifeForce.apply(this); //need some pronouns as well
-        return speciesBringToLife.apply(this, arguments);
+        selfAwareness = pronounsFor(this, lifeForce.length);
+        selfAwareBeing = [this].concat(selfAwareness);
+        return lifeForce.apply(this, selfAwareBeing).apply(this, arguments);
       }
     }
 
