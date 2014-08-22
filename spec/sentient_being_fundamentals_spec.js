@@ -38,11 +38,11 @@ describe("SentientBeing", function() {
       expect(typeof bob).toEqual("object");
     })
 
-    it("is an instance of the constructor function", function() {
+    it("is an 'instanceof' the constructor function", function() {
       expect(bob instanceof Human).toBe(true);
     });
 
-    it("was constructed by 'God'", function() {
+    it("was constructed by God", function() {
       expect(bob.constructor.name).toEqual("God");
     });
 
