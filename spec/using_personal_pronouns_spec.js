@@ -1,4 +1,4 @@
-describe("using personal pronouns", function() {
+describe("Using personal pronouns", function() {
   var Duck, Duck, daffy, woody;
 
   beforeEach(function() {

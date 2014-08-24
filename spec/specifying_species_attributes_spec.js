@@ -1,4 +1,4 @@
-describe("Species", function() {
+describe("Species attributes", function() {
   var Human, bob;
 
   beforeEach(function() {
