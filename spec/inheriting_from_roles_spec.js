@@ -34,6 +34,10 @@ describe("Specifying roles:", function() {
 
   describe("a species", function() {
 
+    it("has a roles attribute", function() {
+      expect(garfield.roles).toEqual([ predator, pet ]);
+    });
+
     it("gains the same attributes as the specifed role objects", function(){
       expect(garfield.hunt).not.toBe(undefined);
       expect(garfield.biteHuman).not.toBe(undefined);
