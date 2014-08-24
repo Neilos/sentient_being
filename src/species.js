@@ -9,7 +9,6 @@ var Species = function(blueprint) {
 
   God.grantFaithInGodTo = function(species) {
     species.prototype.constructor = God;
-    species.constructor = God;
   };
 
   God.copyAttributesFromBluePrintTo = function(species){

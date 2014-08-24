@@ -71,8 +71,8 @@ describe("Species", function() {
 
   it("Each species has a different God", function() {
     var Elephant = Species();
-    var elephantGod = Elephant.constructor;
-    var humanGod = Human.constructor;
+    var elephantGod = Elephant.prototype.constructor;
+    var humanGod = Human.prototype.constructor;
     expect(elephantGod === humanGod).toBe(false);
   });
 
