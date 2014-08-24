@@ -57,6 +57,40 @@ describe("Specifying roles:", function() {
 
     });
 
+    describe("when inheriting from an ancestor species that includes roles", function() {
+      var Tiger, tigger
+
+      beforeEach(function() {
+        circusAnimal = {
+          lookSad : true,
+          hunt : function() {
+            return "alas no more"
+          }
+        }
+
+        Tiger = Species({
+          parent: Cat,
+          roles: [ circusAnimal ],
+          bringToLife : function() {
+            return function() {
+              this.expressContentment = "growl";
+            };
+          }
+        });
+
+        tigger = new Tiger("tigger");
+      });
+
+      it("overwrites the role attributes inherited from the ancestor species (as normal)", function() {
+        expect(tigger.expressContentment).toEqual("growl");
+      });
+
+      it("gains attributes from roles over attributes from ancestor species", function() {
+        expect(tigger.hunt()).toEqual("alas no more");
+      });
+
+    });
+
   });
 
 });
