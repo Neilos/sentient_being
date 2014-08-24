@@ -27,7 +27,7 @@ describe("using personal pronouns", function() {
 
   });
 
-  describe("when inheriting from a ancestorSpecies", function() {
+  describe("when inheriting from a ancestor species", function() {
 
     beforeEach(function() {
       Duck = new Species({
@@ -45,7 +45,7 @@ describe("using personal pronouns", function() {
       daffy = new Duck("daffy", "sailor", null);
     });
 
-    it("is possible to use personal pronouns in both the species and ancestorSpecies definitions", function() {
+    it("can use personal pronouns in both the species and ancestorSpecies definitions", function() {
       expect(daffy.name).toEqual("daffy");
       expect(daffy.sayName()).toEqual("My name is daffy");
       expect(daffy.hat).toEqual("sailor");

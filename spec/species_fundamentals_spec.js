@@ -21,8 +21,11 @@ describe("Species", function() {
 
   describe("the returned constructor function", function() {
 
-    it("is also a Species but is not THE Species", function() {
+    it("is a Species", function() {
       expect(Human.name).toEqual("Species");
+    });
+
+    it("is not the Species function", function() {
       expect(Human).not.toBe(Species);
     });
 
@@ -32,7 +35,7 @@ describe("Species", function() {
 
   });
 
-  describe("object instance created with a Species constructor function", function() {
+  describe("an object instance created with a Species constructor function", function() {
 
     it("is a 'typeof' object", function() {
       expect(typeof bob).toEqual("object");
@@ -42,8 +45,12 @@ describe("Species", function() {
       expect(bob instanceof Object).toBe(true);
     });
 
-    it("is an 'instanceof' the constructor function", function() {
+    it("is an 'instanceof' the Species type (aka constructor function)", function() {
       expect(bob instanceof Human).toBe(true);
+    });
+
+    it("is NOT an 'instanceof' Species", function() {
+      expect(bob instanceof Species).toBe(false);
     });
 
     it("was constructed by God", function() {
