@@ -52,12 +52,21 @@ describe("Species", function() {
 
   });
 
-  it("There is only one God", function() {
+  it("Within a species there is only one God", function() {
+    var jane = new Human();
     var god1 = Human.constructor;
     var god2 = bob.constructor;
     var god3 = god1.constructor;
     var god4 = god1.prototype.constructor;
-    expect(god1 === god2 && god2 === god3 && god3 === god4).toBe(true);
+    var god5 = jane.constructor;
+    expect(god1 === god2 && god2 === god3 && god3 === god4 && god4 === god5).toBe(true);
+  });
+
+  it("Each species has a different God", function() {
+    var Elephant = Species();
+    var elephantGod = Elephant.constructor;
+    var humanGod = Human.constructor;
+    expect(elephantGod === humanGod).toBe(false);
   });
 
   describe("God", function() {
