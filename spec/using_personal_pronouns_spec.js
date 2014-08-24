@@ -1,4 +1,4 @@
-describe("Using personal pronouns", function() {
+describe("Using personal pronouns:", function() {
   var Duck, Duck, daffy, woody;
 
   beforeEach(function() {
@@ -14,7 +14,7 @@ describe("Using personal pronouns", function() {
     });
   });
 
-  describe("specifying a list of pronouns in the argument list for the outer 'bringToLife' function", function() {
+  describe("Specifying a list of pronouns in the argument list for the outer 'bringToLife' function", function() {
 
     it("makes it possible to use personal pronouns in place of the 'this' keyword", function() {
       var usePersonalPronouns = function() {
@@ -27,7 +27,7 @@ describe("Using personal pronouns", function() {
 
   });
 
-  describe("when inheriting from a ancestor species", function() {
+  describe("When inheriting from an ancestor species", function() {
 
     beforeEach(function() {
       Duck = new Species({
