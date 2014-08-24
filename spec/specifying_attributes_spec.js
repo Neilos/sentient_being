@@ -16,7 +16,7 @@ describe("Species attributes", function() {
     bob = new Human("bob");
   });
 
-  describe("object instance", function() {
+  describe("an object instance", function() {
 
     it("has the attributes specified in the 'bringToLife' function", function(){
       expect(bob.name).toEqual("bob");
@@ -30,13 +30,16 @@ describe("Species attributes", function() {
       expect(bob.sayName()).toEqual("I'm not telling");
     });
 
-    it("has attributes that are completely separate from other object instances", function() {
+    it("has its own attributes that are completely separate from other instances", function() {
       jane = new Human("jane");
+      expect(bob.sayName).not.toBe(jane.sayName);
+    });
+
+    it("can redefine its own attributes without affecting other instances", function(){
       expect(jane.sayName()).toEqual("My name is jane");
       bob.sayName = function() { return "I'm not telling" };  // redefine bob's function
-      expect(jane.sayName()).toEqual("My name is jane");  // jane's function is not affected
-      bob.sayName = jane.sayName;  // restore the function to bob
-      expect(bob.sayName()).toEqual("My name is bob");
+      expect(bob.sayName()).toEqual("I'm not telling");
+      expect(jane.sayName()).toEqual("My name is jane");  // jane's function (from prototype) is not affected
     });
 
     describe("when 'bringToLife' function does not define an inner function", function() {
