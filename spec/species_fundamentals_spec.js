@@ -30,7 +30,7 @@ describe("Species", function() {
     });
 
     it("was constructed by God", function() {
-      expect(Human.constructor.name).toEqual("God");
+      expect(Human.prototype.constructor.name).toEqual("God");
     });
 
   });
@@ -61,7 +61,7 @@ describe("Species", function() {
 
   it("Within a species there is only one God", function() {
     var jane = new Human();
-    var god1 = Human.constructor;
+    var god1 = Human.prototype.constructor;
     var god2 = bob.constructor;
     var god3 = god1.constructor;
     var god4 = god1.prototype.constructor;
@@ -91,14 +91,14 @@ describe("Species", function() {
       expect(god.name).toEqual("God");
     });
 
-    it("was constructed by God", function() {
-      expect(god.constructor).toBe(god);
-      expect(god.constructor.name).toEqual("God");
-    })
+    it("is his own prototype", function() {
+      expect(god.prototype).toBe(god);
+      expect(god.prototype.name).toBe("God");
+    });
 
-    it("has a prototype that was constructed by God", function() {
-      expect(god.prototype.constructor).toBe(god)
-      expect(god.prototype.constructor.name).toEqual("God")
+    it("was constructed by God", function() {
+      expect(god.prototype.constructor).toBe(god);
+      expect(god.prototype.constructor.name).toEqual("God");
     })
 
     it("returns new types of species (just like the Species function)", function() {
@@ -110,6 +110,14 @@ describe("Species", function() {
       expect(god instanceof Species).toBe(false);
       expect(god).not.toBe(Species);
     });
+
+    it("can speak", function() {
+      expect(god.speak()).toEqual("I AM GOD");
+    })
+
+    it("knows the meaning of life", function() {
+      expect(god.meaningOfLife).toEqual(42);
+    })
 
   });
 

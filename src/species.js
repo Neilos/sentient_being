@@ -1,59 +1,75 @@
 var Species = function(blueprint) {
   var Species, DNA, AncestorSpecies, God, lifeForce, selfAwareness, selfAwareBeing;
 
-  var pronounsFor = function(self, selfCount) {
-    return Array.apply(null, new Array(selfCount)).map(Object.prototype.valueOf, self);
+  God = function God() { return Species };
+  God.meaningOfLife = 42;
+  God.speak = function() { return "I AM GOD" };
+
+  God.grantFaithInGodTo = function(species) {
+    species.prototype.constructor = God;
+    species.constructor = God;
   };
 
-  var grantHeritageAwareness = function() {
-    lifeForce = Species.ancestorSpecies.bringToLife;
-    selfAwareness = pronounsFor(this, lifeForce.length);
-    selfAwareBeing = [this].concat(selfAwareness);
-    return lifeForce.apply(this, selfAwareBeing).apply(this, arguments);
-  }
-
-  var grantSelfAwareness = function() {
-    lifeForce = Species.prototype.bringToLife;
-    selfAwareness = pronounsFor(this, lifeForce.length);
-    selfAwareBeing = [this].concat(selfAwareness);
-    return lifeForce.apply(this, selfAwareBeing).apply(this, arguments);
-  }
-
-  Species = function Species() {
-    this.bringToLife = function() {
-      if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
-        grantHeritageAwareness.apply(this, arguments);
+  God.copyAttributesFromBluePrintTo = function(species){
+    for (attribute in blueprint) {
+      if (blueprint.hasOwnProperty(attribute)) {
+          species.prototype[attribute] = blueprint[attribute];
       }
-      if (Species.prototype.hasOwnProperty("bringToLife")) {
-        grantSelfAwareness.apply(this, arguments);
-      }
+    }
+  };
+
+  God.addDNATo =  function(species) {
+    if (blueprint && blueprint.ancestorSpecies) {
+      AncestorSpecies = blueprint.ancestorSpecies;
+    } else {
+      AncestorSpecies = Object;
+    }
+
+    DNA = function DNA() {};
+    DNA.prototype = AncestorSpecies.prototype;
+    species.prototype = new DNA();
+    species.ancestorSpecies = AncestorSpecies.prototype;
+  };
+
+  God.breathLifeInto = function() {
+
+    var getIdentitiesFor = function(self, selfCount) {
+      return Array.apply(null, new Array(selfCount)).map(Object.prototype.valueOf, self);
     };
-    this.bringToLife.apply(this, arguments);
+
+    var grantHeritageAwareness = function() {
+      lifeForce = Species.ancestorSpecies.bringToLife;
+      selfAwareness = getIdentitiesFor(this, lifeForce.length);
+      selfAwareBeing = [this].concat(selfAwareness);
+      return lifeForce.apply(this, selfAwareBeing).apply(this, arguments);
+    };
+
+    var grantSelfAwareness = function() {
+      lifeForce = Species.prototype.bringToLife;
+      selfAwareness = getIdentitiesFor(this, lifeForce.length);
+      selfAwareBeing = [this].concat(selfAwareness);
+      return lifeForce.apply(this, selfAwareBeing).apply(this, arguments);
+    };
+
+    if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
+      grantHeritageAwareness.apply(this, arguments);
+    }
+
+    if (Species.prototype.hasOwnProperty("bringToLife")) {
+      grantSelfAwareness.apply(this, arguments);
+    }
   };
 
-  if (blueprint && blueprint.ancestorSpecies) {
-    AncestorSpecies = blueprint.ancestorSpecies;
-  } else {
-    AncestorSpecies = Object;
-  }
-
-  God = function God(){ return Species; };
   God.constructor = God;
   God.prototype = God;
 
-  DNA = function DNA() {};
-  DNA.prototype = AncestorSpecies.prototype;
-  Species.prototype = new DNA();
-  Species.ancestorSpecies = AncestorSpecies.prototype;
+  Species = function Species() {
+    God.breathLifeInto.apply(this, arguments);
+  };
 
-  for (attribute in blueprint) {
-    if (blueprint.hasOwnProperty(attribute)) {
-        Species.prototype[attribute] = blueprint[attribute];
-    }
-  }
-
-  Species.prototype.constructor = God;
-  Species.constructor = God;
+  God.addDNATo(Species);
+  God.copyAttributesFromBluePrintTo(Species);
+  God.grantFaithInGodTo(Species);
 
   return Species;
 };
