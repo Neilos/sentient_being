@@ -58,5 +58,102 @@ describe("Species attributes", function() {
 
   });
 
+  describe("Object and array attributes:", function() {
+    var Dog, BassetHound, fido, dogBall, dogBed, owner, collars
+
+    beforeEach(function() {
+      owner = { name : "jeff" }
+      home = { name : "21 jump street" }
+      collars = [ "red", "blue" ];
+      dogBall = { round : true };
+      dogBed = { comfy : true };
+      balls = [ dogBall ];
+      Dog = Species({
+        home : home,
+        weekendRoutine : { napTime: "never", hungry:  "always" },
+        petNames : ["boy", "dog", "dumb mutt"],
+        knownThings : [owner, home, dogBall, dogBed],
+        bringToLife : function() {
+          this.owner = owner;
+          this.barkTypes = ["bark", "woof"];
+          this.collars = collars
+          this.weekdayRoutine = { napTime: "every hour", hungry:  "every hour" };
+          this.favouriteThings = [ dogBall, dogBed ];
+        }
+      });
+      rover = new Dog();
+      fido = new Dog();
+    });
+
+    describe("an object attribute", function() {
+
+      describe("defined inside the species definition", function() {
+
+        describe("and inside the 'bringToLife' function", function() {
+
+          it("is NOT shared with other species instances", function() {
+            expect(fido.weekdayRoutine).not.toBe(rover.weekdayRoutine);
+          });
+
+        });
+
+        describe("but outside the 'bringToLife' function", function() {
+
+          it("IS shared with other species instances", function() {
+            expect(fido.weekendRoutine).toBe(rover.weekendRoutine);
+          });
+
+        });
+
+      });
+
+      describe("defined outside the species definition", function() {
+
+        it("is shared with other species instances", function() {
+          expect(fido.owner).toBe(rover.owner);
+          expect(fido.home).toBe(rover.home);
+        });
+
+      });
+
+    });
+
+    describe("an array attribute", function() {
+
+      describe("defined inside the species definition", function() {
+
+        describe("inside the bringToLife' function", function() {
+
+          it("is NOT shared with other species instances", function() {
+            expect(fido.barkTypes).not.toBe(rover.barkTypes);
+            expect(fido.favouriteThings).not.toBe(rover.favouriteThings);
+          });
+
+        });
+
+        describe("but outside the 'bringToLife' function", function() {
+
+          it("IS shared with other species instances", function() {
+            expect(fido.petNames).toBe(rover.petNames);
+            expect(fido.knownThings).toBe(rover.knownThings);
+          });
+
+        });
+
+      });
+
+      describe("defined outside the species definition", function() {
+
+        it("IS shared with other species instances", function() {
+          expect(fido.collars).toBe(rover.collars);
+          expect(fido.balls).toBe(rover.balls);
+        })
+
+      });
+
+    });
+
+  });
+
 });
 

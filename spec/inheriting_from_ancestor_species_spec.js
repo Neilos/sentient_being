@@ -37,7 +37,7 @@ describe("Species inheritance:", function() {
 
   });
 
-  describe("an instance of a Child Species", function() {
+  describe("an instance of Species", function() {
 
     it("has a ancestorSpecies property set to the ancestorSpecies", function() {
       expect(bob.ancestorSpecies).toBe(Ape);
@@ -175,6 +175,104 @@ describe("Species inheritance:", function() {
 
   });
 
+
+  describe("Object and array attributes:", function() {
+    var Dog, BassetHound, fido, dogBall, dogBed, owner, collars
+
+    beforeEach(function() {
+      owner = { name : "jeff" }
+      home = { name : "21 jump street" }
+      collars = [ "red", "blue" ];
+      dogBall = { round : true };
+      dogBed = { comfy : true };
+      balls = [ dogBall ];
+      Dog = Species({
+        home : home,
+        weekendRoutine : { napTime: "never", hungry:  "always" },
+        petNames : ["boy", "dog", "dumb mutt"],
+        knownThings : [owner, home, dogBall, dogBed],
+        bringToLife : function() {
+          this.owner = owner;
+          this.barkTypes = ["bark", "woof"];
+          this.collars = collars
+          this.weekdayRoutine = { napTime: "every hour", hungry:  "every hour" };
+          this.favouriteThings = [ dogBall, dogBed ];
+        }
+      });
+      BassetHound = Species({ancestorSpecies : Dog})
+      rover = new Dog();
+      fido = new BassetHound();
+    });
+
+    describe("an object attribute", function() {
+
+      describe("defined inside the ancestor species", function() {
+
+        describe("inside the 'bringToLife' function", function() {
+
+          it("is NOT shared with ancestor species instances", function() {
+            expect(fido.weekdayRoutine).not.toBe(rover.weekdayRoutine);
+          });
+
+        });
+
+        describe("but outside the 'bringToLife' function", function() {
+
+          it("IS shared with ancestor species instances", function() {
+            expect(fido.weekendRoutine).toBe(rover.weekendRoutine);
+          });
+
+        });
+
+      });
+
+      describe("defined outside the ancestor species", function() {
+
+        it("IS shared with ancestor species instances", function() {
+          expect(fido.owner).toBe(rover.owner);
+          expect(fido.home).toBe(rover.home);
+        });
+
+      });
+
+    });
+
+    describe("an array attribute", function() {
+
+      describe("defined inside the ancestor species", function() {
+
+        describe("inside the ancestor's bringToLife' function", function() {
+
+          it("is NOT shared with ancestor species instances", function() {
+            expect(fido.barkTypes).not.toBe(rover.barkTypes);
+            expect(fido.favouriteThings).not.toBe(rover.favouriteThings);
+          });
+
+        });
+
+        describe("but outside the ancestor's 'bringToLife' function", function() {
+
+          it("IS shared with ancestor species instances", function() {
+            expect(fido.petNames).toBe(rover.petNames);
+            expect(fido.knownThings).toBe(rover.knownThings);
+          });
+
+        });
+
+      });
+
+      describe("defined outside the ancestor species", function() {
+
+        it("IS shared with ancestor species instances", function() {
+          expect(fido.collars).toBe(rover.collars);
+          expect(fido.balls).toBe(rover.balls);
+        })
+
+      });
+
+    });
+
+  });
 
 });
 
