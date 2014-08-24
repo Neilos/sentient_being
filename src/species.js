@@ -82,5 +82,5 @@ var Species = function(blueprint) {
   God.copyAttributesFromBluePrintTo(Species);
   God.grantFaithInGodTo(Species);
 
-  return Species;
+  return God();
 };
