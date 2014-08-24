@@ -12,7 +12,7 @@ describe("Specifying roles:", function() {
 
     predator = {
       hunt : function() {
-        return "softly creeping up."
+        return "softly creeping up"
       },
       biteHuman : true
     };
@@ -39,9 +39,9 @@ describe("Specifying roles:", function() {
     });
 
     it("gains the same attributes as the specifed role objects", function(){
-      expect(garfield.hunt).not.toBe(undefined);
-      expect(garfield.biteHuman).not.toBe(undefined);
-      expect(garfield.beStroked).not.toBe(undefined);
+      expect(garfield.hunt()).toEqual("softly creeping up");
+      expect(garfield.biteHuman).toEqual(false);
+      expect(garfield.beStroked()).toEqual("purrrrrrrr");
     });
 
     it("still has its own attributes, which take precedence over the role attributes", function() {
