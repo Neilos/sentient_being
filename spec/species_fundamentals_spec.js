@@ -94,7 +94,12 @@ describe("Species", function() {
       expect(god.prototype.constructor.name).toEqual("God")
     })
 
-    it("is not a Species", function() {
+    it("returns new types of species (just like the Species function)", function() {
+      var Dog = god();
+      expect(Dog.name).toEqual("Species")
+    });
+
+    it("is NOT the Species function", function() {
       expect(god instanceof Species).toBe(false);
       expect(god).not.toBe(Species);
     });
