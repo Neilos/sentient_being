@@ -4,6 +4,8 @@ var Species = function(blueprint) {
   God = function God() { return Species };
   God.meaningOfLife = 42;
   God.speak = function() { return "I AM GOD" };
+  God.prototype = God;
+  God.prototype.constructor = God;
 
   God.grantFaithInGodTo = function(species) {
     species.prototype.constructor = God;
@@ -70,9 +72,6 @@ var Species = function(blueprint) {
       grantSelfAwareness.apply(this, arguments);
     }
   };
-
-  God.constructor = God;
-  God.prototype = God;
 
   Species = function Species() {
     God.breathLifeInto.apply(this, arguments);
