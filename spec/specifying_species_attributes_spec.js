@@ -39,6 +39,24 @@ describe("Species attributes", function() {
       expect(bob.sayName()).toEqual("My name is bob");
     });
 
+    describe("when 'bringToLife' function does not define an inner function", function() {
+      var Car, mercedes;
+      beforeEach(function(){
+        Car = Species({
+          bringToLife : function() {
+            this.wheels = 4;
+          }
+        });
+        mercedes = new Car();
+      });
+
+      it("attributes are still defined", function () {
+        expect(mercedes.wheels).toEqual(4);
+      });
+
+    })
+
   });
 
 });
+

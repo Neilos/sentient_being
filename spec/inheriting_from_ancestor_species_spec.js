@@ -130,6 +130,21 @@ describe("Species inheritance:", function() {
         expect(spock.emotional).toBe(false);
       });
 
+      describe("when the ancestor species' 'bringToLife' function doesn't contain an inner function", function(){
+
+        it("it doesn't break construction of the child", function() {
+          var Mouse = new Species({
+            bringToLife: function() {
+              this.tail = "long";
+            }
+          });
+          var FieldMouse = Species({ ancestorSpecies : Mouse });
+          var whiskers = new FieldMouse();
+          expect(whiskers.tail).toEqual("long")
+        });
+
+      });
+
     });
 
     describe("an attribute declared outside the ancestor species' 'bringToLife' function", function() {

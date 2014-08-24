@@ -1,5 +1,5 @@
 var Species = function(blueprint) {
-  var Species, DNA, AncestorSpecies, God, lifeForce, selfAwareness, selfAwareBeing;
+  var Species, DNA, AncestorSpecies, God
 
   God = function God() { return Species };
   God.meaningOfLife = 42;
@@ -32,6 +32,7 @@ var Species = function(blueprint) {
   };
 
   God.breathLifeInto = function() {
+    var lifeForce, selfAwareness, selfAwareBeing, powerOfLife;
 
     var getIdentitiesFor = function(self, selfCount) {
       return Array.apply(null, new Array(selfCount)).map(Object.prototype.valueOf, self);
@@ -41,14 +42,24 @@ var Species = function(blueprint) {
       lifeForce = Species.ancestorSpecies.bringToLife;
       selfAwareness = getIdentitiesFor(this, lifeForce.length);
       selfAwareBeing = [this].concat(selfAwareness);
-      return lifeForce.apply(this, selfAwareBeing).apply(this, arguments);
+      powerOfLife = lifeForce.apply(this, selfAwareBeing)
+      if (typeof powerOfLife === 'function'){
+        return powerOfLife.apply(this, arguments);
+      } else {
+        return powerOfLife;
+      }
     };
 
     var grantSelfAwareness = function() {
       lifeForce = Species.prototype.bringToLife;
       selfAwareness = getIdentitiesFor(this, lifeForce.length);
       selfAwareBeing = [this].concat(selfAwareness);
-      return lifeForce.apply(this, selfAwareBeing).apply(this, arguments);
+      powerOfLife = lifeForce.apply(this, selfAwareBeing)
+      if (typeof powerOfLife === 'function'){
+        return powerOfLife.apply(this, arguments);
+      } else {
+        return powerOfLife;
+      }
     };
 
     if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
