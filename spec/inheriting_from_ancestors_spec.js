@@ -204,46 +204,15 @@ describe("Species inheritance:", function() {
       fido = new BassetHound();
     });
 
-    describe("an object attribute", function() {
+    describe("an 'object' or 'array' attribute", function() {
 
       describe("defined inside the ancestor species", function() {
 
-        describe("inside the 'bio' function", function() {
+        describe("inside the ancestor's 'bio' function", function() {
 
           it("is NOT shared with ancestor species instances", function() {
             expect(fido.weekdayRoutine).not.toBe(rover.weekdayRoutine);
-          });
 
-        });
-
-        describe("but outside the 'bio' function", function() {
-
-          it("IS shared with ancestor species instances", function() {
-            expect(fido.weekendRoutine).toBe(rover.weekendRoutine);
-          });
-
-        });
-
-      });
-
-      describe("defined outside the ancestor species", function() {
-
-        it("IS shared with ancestor species instances", function() {
-          expect(fido.owner).toBe(rover.owner);
-          expect(fido.home).toBe(rover.home);
-        });
-
-      });
-
-    });
-
-    describe("an array attribute", function() {
-
-      describe("defined inside the ancestor species", function() {
-
-        describe("inside the ancestor's bio' function", function() {
-
-          it("is NOT shared with ancestor species instances", function() {
             expect(fido.barkTypes).not.toBe(rover.barkTypes);
             expect(fido.favouriteThings).not.toBe(rover.favouriteThings);
           });
@@ -253,6 +222,8 @@ describe("Species inheritance:", function() {
         describe("but outside the ancestor's 'bio' function", function() {
 
           it("IS shared with ancestor species instances", function() {
+            expect(fido.weekendRoutine).toBe(rover.weekendRoutine);
+
             expect(fido.petNames).toBe(rover.petNames);
             expect(fido.knownThings).toBe(rover.knownThings);
           });
@@ -264,9 +235,12 @@ describe("Species inheritance:", function() {
       describe("defined outside the ancestor species", function() {
 
         it("IS shared with ancestor species instances", function() {
+          expect(fido.owner).toBe(rover.owner);
+          expect(fido.home).toBe(rover.home);
+
           expect(fido.collars).toBe(rover.collars);
           expect(fido.balls).toBe(rover.balls);
-        })
+        });
 
       });
 
