@@ -14,10 +14,10 @@
 
   God.copyAttributes = function(whatToCopy){
     var blueprint = whatToCopy.from
-    var species = whatToCopy.to
+    var object = whatToCopy.to
     for (attribute in blueprint) {
       if (blueprint.hasOwnProperty(attribute)) {
-          species.prototype[attribute] = blueprint[attribute];
+          object.prototype[attribute] = blueprint[attribute];
       }
     }
   };
