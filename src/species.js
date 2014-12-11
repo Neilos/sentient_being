@@ -1,6 +1,7 @@
 (function() {
-
   var God, DNA, Species;
+
+  DNA = function DNA() {};
 
   God = function God() { };
   God.meaningOfLife = 42;
@@ -21,7 +22,6 @@
   };
 
   God.applyDNA =  function(ancestorSpecies, childSpecies) {
-    DNA = function DNA() {};
     DNA.prototype = ancestorSpecies.prototype;
     childSpecies.prototype = new DNA();
     childSpecies.ancestorSpecies = ancestorSpecies.prototype;
@@ -70,19 +70,15 @@
   };
 
   Species = function(blueprint) {
-
     var Species = function Species() {
       God.breathLifeInto.apply(this, [Species].concat(Array.prototype.slice.call(arguments)));
     };
-
     var ancestorSpecies = (blueprint && blueprint.ancestorSpecies) ? blueprint.ancestorSpecies : Object
     God.applyDNA(ancestorSpecies, Species);
     God.copyAttributes(blueprint, Species);
     God.grantFaithInGodTo(Species);
-
     return Species;
   };
 
   this.Species = Species
-
-})()
+})();
