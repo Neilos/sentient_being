@@ -5,7 +5,6 @@
 
   God = function God() { };
   God.meaningOfLife = 42;
-  God.speak = function() { return "I AM GOD" };
   God.prototype = God;
   God.prototype.constructor = God;
 

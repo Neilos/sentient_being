@@ -101,10 +101,6 @@ describe("Species", function() {
       expect(god).not.toBe(Species);
     });
 
-    it("can speak", function() {
-      expect(god.speak()).toEqual("I AM GOD");
-    })
-
     it("knows the meaning of life", function() {
       expect(god.meaningOfLife).toEqual(42);
     })
@@ -112,5 +108,3 @@ describe("Species", function() {
   });
 
 });
-
-
