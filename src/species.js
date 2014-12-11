@@ -33,7 +33,7 @@
     };
 
     var grantHeritageAwareness = function(species) {
-      var lifeForce = species.ancestorSpecies.bringToLife;
+      var lifeForce = species.ancestorSpecies.bio;
       var selfAwareness = getIdentitiesFor(this, lifeForce.length);
       var selfAwareBeing = [this].concat(selfAwareness);
       var powerOfLife = lifeForce.apply(this, selfAwareBeing)
@@ -45,7 +45,7 @@
     };
 
     var grantSelfAwareness = function(species) {
-      var lifeForce = species.prototype.bringToLife;
+      var lifeForce = species.prototype.bio;
       var selfAwareness = getIdentitiesFor(this, lifeForce.length);
       var selfAwareBeing = [this].concat(selfAwareness);
       var powerOfLife = lifeForce.apply(this, selfAwareBeing)
@@ -59,11 +59,11 @@
     var speciesType = arguments[0]
     var params = [speciesType].concat(Array.prototype.slice.call(arguments, 1))
 
-    if (speciesType.ancestorSpecies && speciesType.ancestorSpecies.hasOwnProperty("bringToLife")) {
+    if (speciesType.ancestorSpecies && speciesType.ancestorSpecies.hasOwnProperty("bio")) {
       grantHeritageAwareness.apply(this, params);
     }
 
-    if (speciesType.prototype.hasOwnProperty("bringToLife")) {
+    if (speciesType.prototype.hasOwnProperty("bio")) {
       grantSelfAwareness.apply(this, params);
     }
   };

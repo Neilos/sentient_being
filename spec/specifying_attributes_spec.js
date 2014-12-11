@@ -3,7 +3,7 @@ describe("Species attributes", function() {
 
   beforeEach(function() {
     Human = Species({
-      bringToLife: function() {
+      bio: function() {
         this.job = "pastry chef";
         return function(name) {
           this.name = name;
@@ -18,7 +18,7 @@ describe("Species attributes", function() {
 
   describe("object instance", function() {
 
-    it("has the attributes specified in the 'bringToLife' function", function(){
+    it("has the attributes specified in the 'bio' function", function(){
       expect(bob.name).toEqual("bob");
       expect(bob.sayName()).toEqual("My name is bob");
       expect(bob.job).toEqual("pastry chef");
@@ -39,11 +39,11 @@ describe("Species attributes", function() {
       expect(bob.sayName()).toEqual("My name is bob");
     });
 
-    describe("when 'bringToLife' function does not define an inner function", function() {
+    describe("when 'bio' function does not define an inner function", function() {
       var Car, mercedes;
       beforeEach(function(){
         Car = Species({
-          bringToLife : function() {
+          bio : function() {
             this.wheels = 4;
           }
         });
@@ -73,7 +73,7 @@ describe("Species attributes", function() {
         weekendRoutine : { napTime: "never", hungry:  "always" },
         petNames : ["boy", "dog", "dumb mutt"],
         knownThings : [owner, home, dogBall, dogBed],
-        bringToLife : function() {
+        bio : function() {
           this.owner = owner;
           this.barkTypes = ["bark", "woof"];
           this.collars = collars
@@ -89,7 +89,7 @@ describe("Species attributes", function() {
 
       describe("defined inside the species definition", function() {
 
-        describe("and inside the 'bringToLife' function", function() {
+        describe("and inside the 'bio' function", function() {
 
           it("is NOT shared with other species instances", function() {
             expect(fido.weekdayRoutine).not.toBe(rover.weekdayRoutine);
@@ -97,7 +97,7 @@ describe("Species attributes", function() {
 
         });
 
-        describe("but outside the 'bringToLife' function", function() {
+        describe("but outside the 'bio' function", function() {
 
           it("IS shared with other species instances", function() {
             expect(fido.weekendRoutine).toBe(rover.weekendRoutine);
@@ -122,7 +122,7 @@ describe("Species attributes", function() {
 
       describe("defined inside the species definition", function() {
 
-        describe("inside the bringToLife' function", function() {
+        describe("inside the bio' function", function() {
 
           it("is NOT shared with other species instances", function() {
             expect(fido.barkTypes).not.toBe(rover.barkTypes);
@@ -131,7 +131,7 @@ describe("Species attributes", function() {
 
         });
 
-        describe("but outside the 'bringToLife' function", function() {
+        describe("but outside the 'bio' function", function() {
 
           it("IS shared with other species instances", function() {
             expect(fido.petNames).toBe(rover.petNames);

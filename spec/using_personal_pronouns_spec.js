@@ -3,7 +3,7 @@ describe("Using personal pronouns", function() {
 
   beforeEach(function() {
     Bird = Species({
-      bringToLife : function(my, I) {
+      bio : function(my, I) {
         I.sayName = function() {
           return "My name is " +  my.name;
         }
@@ -14,7 +14,7 @@ describe("Using personal pronouns", function() {
     });
   });
 
-  describe("specifying a list of pronouns in the argument list for the outer 'bringToLife' function", function() {
+  describe("specifying a list of pronouns in the argument list for the outer 'bio' function", function() {
 
     it("makes it possible to use personal pronouns in place of the 'this' keyword", function() {
       var usePersonalPronouns = function() {
@@ -32,7 +32,7 @@ describe("Using personal pronouns", function() {
     beforeEach(function() {
       Duck = new Species({
         ancestorSpecies : Bird,
-        bringToLife : function(my, I) {
+        bio : function(my, I) {
           I.quack = function(words) {
             return "quack! " + words + " quack!"
           }
