@@ -41,8 +41,7 @@
       var selfAwareBeing = [this].concat(selfAwareness);
       var powerOfLife = lifeForce.apply(this, selfAwareBeing)
       if (typeof powerOfLife === 'function'){
-        var args = Array.prototype.slice.call(arguments, 1)
-        return powerOfLife.apply(this, args);
+        return powerOfLife.apply(this, Array.prototype.slice.call(arguments, 1));
       } else {
         return powerOfLife;
       }
@@ -54,14 +53,14 @@
       var selfAwareBeing = [this].concat(selfAwareness);
       var powerOfLife = lifeForce.apply(this, selfAwareBeing)
       if (typeof powerOfLife === 'function'){
-        var args = Array.prototype.slice.call(arguments, 1)
-        return powerOfLife.apply(this, args);
+        return powerOfLife.apply(this, Array.prototype.slice.call(arguments, 1));
       } else {
         return powerOfLife;
       }
     };
 
     var speciesType = arguments[0]
+
     var params = [speciesType].concat(Array.prototype.slice.call(arguments, 1))
 
     if (speciesType.ancestorSpecies && speciesType.ancestorSpecies.hasOwnProperty("bringToLife")) {
