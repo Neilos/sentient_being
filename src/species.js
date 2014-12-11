@@ -12,12 +12,10 @@
     species.prototype.constructor = God;
   };
 
-  God.copyAttributes = function(whatToCopy){
-    var blueprint = whatToCopy.from
-    var object = whatToCopy.to
-    for (attribute in blueprint) {
-      if (blueprint.hasOwnProperty(attribute)) {
-          object.prototype[attribute] = blueprint[attribute];
+  God.copyAttributes = function(attrSource, attrDestination){
+    for (attribute in attrSource) {
+      if (attrSource.hasOwnProperty(attribute)) {
+        attrDestination.prototype[attribute] = attrSource[attribute];
       }
     }
   };
@@ -60,7 +58,6 @@
     };
 
     var speciesType = arguments[0]
-
     var params = [speciesType].concat(Array.prototype.slice.call(arguments, 1))
 
     if (speciesType.ancestorSpecies && speciesType.ancestorSpecies.hasOwnProperty("bringToLife")) {
@@ -80,7 +77,7 @@
 
     var ancestorSpecies = (blueprint && blueprint.ancestorSpecies) ? blueprint.ancestorSpecies : Object
     God.applyDNA(ancestorSpecies, Species);
-    God.copyAttributes({from: blueprint, to: Species});
+    God.copyAttributes(blueprint, Species);
     God.grantFaithInGodTo(Species);
 
     return Species;
