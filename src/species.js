@@ -74,19 +74,12 @@
   };
 
   Species = function(blueprint) {
-    var Species, ancestorSpecies
 
-    Species = function Species() {
-      var params = [Species].concat(Array.prototype.slice.call(arguments))
-      God.breathLifeInto.apply(this, params);
+    var Species = function Species() {
+      God.breathLifeInto.apply(this, [Species].concat(Array.prototype.slice.call(arguments)));
     };
 
-    if (blueprint && blueprint.ancestorSpecies) {
-      ancestorSpecies = blueprint.ancestorSpecies;
-    } else {
-      ancestorSpecies = Object;
-    }
-
+    var ancestorSpecies = (blueprint && blueprint.ancestorSpecies) ? blueprint.ancestorSpecies : Object
     God.applyDNA(ancestorSpecies, Species);
     God.copyAttributes({from: blueprint, to: Species});
     God.grantFaithInGodTo(Species);
