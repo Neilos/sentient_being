@@ -88,7 +88,7 @@ describe("Species inheritance:", function() {
     beforeEach(function() {
 
       Vulcan = new Species({
-        bringToLife: function() {
+        bio: function() {
           this.haircut = "bad";
           return function() {
             this.ears = "pointy";
@@ -100,7 +100,7 @@ describe("Species inheritance:", function() {
 
       Romulan = Species({
         ancestorSpecies : Vulcan,
-        bringToLife: function() {
+        bio: function() {
           return function() { this.emotional = true; };
         }
       });
@@ -117,7 +117,7 @@ describe("Species inheritance:", function() {
 
     });
 
-    describe("an attribute declared in the ancestor species' 'bringToLife' function", function() {
+    describe("an attribute declared in the ancestor species' 'bio' function", function() {
 
       it("is an 'own' property of child species' object instances", function() {
         expect(remus.ears).toEqual("pointy");
@@ -130,11 +130,11 @@ describe("Species inheritance:", function() {
         expect(spock.emotional).toBe(false);
       });
 
-      describe("when the ancestor species' 'bringToLife' function doesn't contain an inner function", function(){
+      describe("when the ancestor species' 'bio' function doesn't contain an inner function", function(){
 
         it("it doesn't break construction of the child", function() {
           var Mouse = new Species({
-            bringToLife: function() {
+            bio: function() {
               this.tail = "long";
             }
           });
@@ -147,7 +147,7 @@ describe("Species inheritance:", function() {
 
     });
 
-    describe("an attribute declared outside the ancestor species' 'bringToLife' function", function() {
+    describe("an attribute declared outside the ancestor species' 'bio' function", function() {
 
       if (Object.prototype.hasOwnProperty("__proto__")) {
         it("is accessible by an object instance (via its prototype)", function() {
@@ -191,7 +191,7 @@ describe("Species inheritance:", function() {
         weekendRoutine : { napTime: "never", hungry:  "always" },
         petNames : ["boy", "dog", "dumb mutt"],
         knownThings : [owner, home, dogBall, dogBed],
-        bringToLife : function() {
+        bio : function() {
           this.owner = owner;
           this.barkTypes = ["bark", "woof"];
           this.collars = collars
@@ -204,55 +204,26 @@ describe("Species inheritance:", function() {
       fido = new BassetHound();
     });
 
-    describe("an object attribute", function() {
+    describe("an 'object' or 'array' attribute", function() {
 
       describe("defined inside the ancestor species", function() {
 
-        describe("inside the 'bringToLife' function", function() {
+        describe("inside the ancestor's 'bio' function", function() {
 
           it("is NOT shared with ancestor species instances", function() {
             expect(fido.weekdayRoutine).not.toBe(rover.weekdayRoutine);
-          });
 
-        });
-
-        describe("but outside the 'bringToLife' function", function() {
-
-          it("IS shared with ancestor species instances", function() {
-            expect(fido.weekendRoutine).toBe(rover.weekendRoutine);
-          });
-
-        });
-
-      });
-
-      describe("defined outside the ancestor species", function() {
-
-        it("IS shared with ancestor species instances", function() {
-          expect(fido.owner).toBe(rover.owner);
-          expect(fido.home).toBe(rover.home);
-        });
-
-      });
-
-    });
-
-    describe("an array attribute", function() {
-
-      describe("defined inside the ancestor species", function() {
-
-        describe("inside the ancestor's bringToLife' function", function() {
-
-          it("is NOT shared with ancestor species instances", function() {
             expect(fido.barkTypes).not.toBe(rover.barkTypes);
             expect(fido.favouriteThings).not.toBe(rover.favouriteThings);
           });
 
         });
 
-        describe("but outside the ancestor's 'bringToLife' function", function() {
+        describe("but outside the ancestor's 'bio' function", function() {
 
           it("IS shared with ancestor species instances", function() {
+            expect(fido.weekendRoutine).toBe(rover.weekendRoutine);
+
             expect(fido.petNames).toBe(rover.petNames);
             expect(fido.knownThings).toBe(rover.knownThings);
           });
@@ -264,9 +235,12 @@ describe("Species inheritance:", function() {
       describe("defined outside the ancestor species", function() {
 
         it("IS shared with ancestor species instances", function() {
+          expect(fido.owner).toBe(rover.owner);
+          expect(fido.home).toBe(rover.home);
+
           expect(fido.collars).toBe(rover.collars);
           expect(fido.balls).toBe(rover.balls);
-        })
+        });
 
       });
 
