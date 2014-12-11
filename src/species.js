@@ -22,14 +22,11 @@
     }
   };
 
-  God.copyDNA =  function(whereToCopy) {
-    var ancestorSpecies = whereToCopy.from
-    var species = whereToCopy.to
-
+  God.applyDNA =  function(ancestorSpecies, childSpecies) {
     DNA = function DNA() {};
     DNA.prototype = ancestorSpecies.prototype;
-    species.prototype = new DNA();
-    species.ancestorSpecies = ancestorSpecies.prototype;
+    childSpecies.prototype = new DNA();
+    childSpecies.ancestorSpecies = ancestorSpecies.prototype;
   };
 
   God.breathLifeInto = function() {
@@ -90,7 +87,7 @@
       ancestorSpecies = Object;
     }
 
-    God.copyDNA({from: ancestorSpecies, to: Species});
+    God.applyDNA(ancestorSpecies, Species);
     God.copyAttributes({from: blueprint, to: Species});
     God.grantFaithInGodTo(Species);
 
@@ -98,4 +95,5 @@
   };
 
   this.Species = Species
+
 })()
