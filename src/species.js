@@ -38,9 +38,9 @@
       var selfAwareBeing = [this].concat(selfAwareness);
       var powerOfLife = lifeForce.apply(this, selfAwareBeing)
       if (typeof powerOfLife === 'function'){
-        return powerOfLife.apply(this, Array.prototype.slice.call(arguments, 1));
+        powerOfLife.apply(this, Array.prototype.slice.call(arguments, 1));
       } else {
-        return powerOfLife;
+        powerOfLife;
       }
     };
 
@@ -50,9 +50,9 @@
       var selfAwareBeing = [this].concat(selfAwareness);
       var powerOfLife = lifeForce.apply(this, selfAwareBeing)
       if (typeof powerOfLife === 'function'){
-        return powerOfLife.apply(this, Array.prototype.slice.call(arguments, 1));
+        powerOfLife.apply(this, Array.prototype.slice.call(arguments, 1));
       } else {
-        return powerOfLife;
+        powerOfLife;
       }
     };
 
