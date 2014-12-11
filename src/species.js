@@ -1,6 +1,7 @@
 (function() {
 
-  var God
+  var God, DNA, Species;
+
   God = function God() { };
   God.meaningOfLife = 42;
   God.speak = function() { return "I AM GOD" };
@@ -31,55 +32,56 @@
     species.ancestorSpecies = ancestorSpecies.prototype;
   };
 
-  var Species = function(blueprint) {
-    var Species, DNA, ancestorSpecies
+  God.breathLifeInto = function() {
 
-    God.breathLifeInto = function() {
+    var getIdentitiesFor = function(self, selfCount) {
+      return Array.apply(null, new Array(selfCount)).map(Object.prototype.valueOf, self);
+    };
 
-
-      var getIdentitiesFor = function(self, selfCount) {
-        return Array.apply(null, new Array(selfCount)).map(Object.prototype.valueOf, self);
-      };
-
-      var grantHeritageAwareness = function(species) {
-        var lifeForce = species.ancestorSpecies.bringToLife;
-        var selfAwareness = getIdentitiesFor(this, lifeForce.length);
-        var selfAwareBeing = [this].concat(selfAwareness);
-        var powerOfLife = lifeForce.apply(this, selfAwareBeing)
-        if (typeof powerOfLife === 'function'){
-          var args = Array.prototype.slice.call(arguments, 1)
-          return powerOfLife.apply(this, args);
-        } else {
-          return powerOfLife;
-        }
-      };
-
-      var grantSelfAwareness = function(species) {
-        var lifeForce = species.prototype.bringToLife;
-        var selfAwareness = getIdentitiesFor(this, lifeForce.length);
-        var selfAwareBeing = [this].concat(selfAwareness);
-        var powerOfLife = lifeForce.apply(this, selfAwareBeing)
-        if (typeof powerOfLife === 'function'){
-          var args = Array.prototype.slice.call(arguments, 1)
-          return powerOfLife.apply(this, args);
-        } else {
-          return powerOfLife;
-        }
-      };
-
-      var params = [Species].concat(Array.prototype.slice.call(arguments))
-
-      if (Species.ancestorSpecies && Species.ancestorSpecies.hasOwnProperty("bringToLife")) {
-        grantHeritageAwareness.apply(this, params);
-      }
-
-      if (Species.prototype.hasOwnProperty("bringToLife")) {
-        grantSelfAwareness.apply(this, params);
+    var grantHeritageAwareness = function(species) {
+      var lifeForce = species.ancestorSpecies.bringToLife;
+      var selfAwareness = getIdentitiesFor(this, lifeForce.length);
+      var selfAwareBeing = [this].concat(selfAwareness);
+      var powerOfLife = lifeForce.apply(this, selfAwareBeing)
+      if (typeof powerOfLife === 'function'){
+        var args = Array.prototype.slice.call(arguments, 1)
+        return powerOfLife.apply(this, args);
+      } else {
+        return powerOfLife;
       }
     };
 
+    var grantSelfAwareness = function(species) {
+      var lifeForce = species.prototype.bringToLife;
+      var selfAwareness = getIdentitiesFor(this, lifeForce.length);
+      var selfAwareBeing = [this].concat(selfAwareness);
+      var powerOfLife = lifeForce.apply(this, selfAwareBeing)
+      if (typeof powerOfLife === 'function'){
+        var args = Array.prototype.slice.call(arguments, 1)
+        return powerOfLife.apply(this, args);
+      } else {
+        return powerOfLife;
+      }
+    };
+
+    var speciesType = arguments[0]
+    var params = [speciesType].concat(Array.prototype.slice.call(arguments, 1))
+
+    if (speciesType.ancestorSpecies && speciesType.ancestorSpecies.hasOwnProperty("bringToLife")) {
+      grantHeritageAwareness.apply(this, params);
+    }
+
+    if (speciesType.prototype.hasOwnProperty("bringToLife")) {
+      grantSelfAwareness.apply(this, params);
+    }
+  };
+
+  Species = function(blueprint) {
+    var Species, ancestorSpecies
+
     Species = function Species() {
-      God.breathLifeInto.apply(this, arguments);
+      var params = [Species].concat(Array.prototype.slice.call(arguments))
+      God.breathLifeInto.apply(this, params);
     };
 
     if (blueprint && blueprint.ancestorSpecies) {

@@ -125,7 +125,7 @@ describe("Species inheritance:", function() {
         expect(remus.hasOwnProperty("ears")).toBe(true);
       });
 
-      xit("can be overridden by child species without overwriting the ancestor attribute", function() {
+      it("can be overridden by child species without overwriting the ancestor attribute", function() {
         expect(remus.emotional).toBe(true);
         expect(spock.emotional).toBe(false);
       });
