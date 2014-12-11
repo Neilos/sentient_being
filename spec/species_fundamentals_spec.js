@@ -59,21 +59,16 @@ describe("Species", function() {
 
   });
 
-  it("Within a species there is only one God", function() {
+  it("For all species there is only one God", function() {
+    var god1 = Human.prototype.constructor; // creator of a species
+    var god2 = bob.constructor; // creator of instances of a species
+    var god3 = god1.constructor; // creator of god(s)
+    var god4 = god1.prototype.constructor; // creator of god's likeness
     var jane = new Human();
-    var god1 = Human.prototype.constructor;
-    var god2 = bob.constructor;
-    var god3 = god1.constructor;
-    var god4 = god1.prototype.constructor;
-    var god5 = jane.constructor;
-    expect(god1 === god2 && god2 === god3 && god3 === god4 && god4 === god5).toBe(true);
-  });
-
-  it("Each species has a different God", function() {
+    var god5 = jane.constructor;  // creator of another instance of the same species
     var Elephant = Species();
-    var elephantGod = Elephant.prototype.constructor;
-    var humanGod = Human.prototype.constructor;
-    expect(elephantGod === humanGod).toBe(false);
+    var god6 = Elephant.prototype.constructor; // creator of another species
+    expect(god1 === god2 && god2 === god3 && god3 === god4 && god4 === god5 && god5 === god6).toBe(true);
   });
 
   describe("God", function() {
@@ -100,11 +95,6 @@ describe("Species", function() {
       expect(god.prototype.constructor).toBe(god);
       expect(god.prototype.constructor.name).toEqual("God");
     })
-
-    it("returns new types of species (just like the Species function)", function() {
-      var Dog = god();
-      expect(Dog.name).toEqual("Species")
-    });
 
     it("is NOT the Species function", function() {
       expect(god instanceof Species).toBe(false);
