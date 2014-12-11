@@ -1,5 +1,4 @@
 (function() {
-  var God, DNA;
 
   var grantKnowledgeOfCreatorTo = function(species) {
     species.prototype.constructor = God;
@@ -14,6 +13,7 @@
   };
 
   var applyDNA =  function(ancestorSpecies, childSpecies) {
+    var DNA = function DNA() {};
     DNA.prototype = ancestorSpecies.prototype;
     childSpecies.prototype = new DNA();
     childSpecies.ancestorSpecies = ancestorSpecies.prototype;
@@ -35,9 +35,7 @@
     }
   }
 
-  DNA = function DNA() {};
-
-  God = function God() { };
+  var God = function God() { };
   God.meaningOfLife = 42;
   God.prototype = God;
   God.prototype.constructor = God;
